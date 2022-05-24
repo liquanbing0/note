@@ -1,3 +1,4 @@
+ceph14命令
 # osd相关
 
 ## 查看osd分配磁盘情况：
@@ -37,9 +38,9 @@
 >ceph health detail --查到osdid/pgid
 - 两副本就去对应的两个osd 三个副本就去对应的三个osd
 - 对应osd节点执行
->systemctl stop ceph-osd@<id>	
+>systemctl stop ceph-osd@<id>
 - 对应osd节点执行
->ceph-objectstore-tool --pgid <pgid> --op mark-complete --data-path /var/lib/ceph/osd/ceph-<osd-id>/ --type bluestore	
+>ceph-objectstore-tool --pgid <pgid> --op mark-complete --data-path /var/lib/ceph/osd/ceph-<osd-id>/ --type bluestore
 - 对应osd节点执行
 >systemctl start ceph-osd@<id>
 
@@ -157,7 +158,7 @@ ceph health detail | grep 'not deep-scrubbed since' | awk '{print $2}' | while r
 >ceph osd crush rename-bucket chengdu2-zone1-dataset1-replicated-root-2 chengdu2-zone1-dataset1-root-2
 >ceph osd crush rename-bucket <crush-rule-root-name> <crush-rule-root-name-new>
 
-## 重命名crush rule 
+## 重命名crush rule
 >ceph osd crush rule rename  chengdu2-zone1-dataset1-pool4-replicated-rule chengdu-zone2-dataset1-pool4-replicated-rule
 >ceph osd crush rule rename  <crush-rule-name> <crush-rule-name-new>
 
@@ -167,7 +168,7 @@ ceph health detail | grep 'not deep-scrubbed since' | awk '{print $2}' | while r
 ## 删除crush rule root
 >ceph osd crush rm <crush-rule-root-name>
 
-## 删除crush rule 
+## 删除crush rule
 >ceph osd crush rule rm <crush-rule-name>
 
 ## pool重命名
@@ -210,7 +211,7 @@ ceph osd crush move node-25 rack=11
 
 ## 创建对象存储user
 - 默认storage-policy-name=default
->radosgw-admin user create --uid=admin --display-name=admin --caps="users=*;buckets=*;metadata=*;usage=*;zone=*" 
+>radosgw-admin user create --uid=admin --display-name=admin --caps="users=*;buckets=*;metadata=*;usage=*;zone=*"
 - 默认storage-policy-name=observer-policy1
 >radosgw-admin user create --uid=observer1 --display-name=observer1 --caps="users=*;buckets=*;metadata=*;usage=*;zone=*" --storage-policy-name=observer-policy1
 
@@ -283,4 +284,4 @@ ceph osd crush move node-25 rack=11
 
 ## 重启rgw，需根据服务器实际实例名称修改
 >for  i in `seq 0 10`;do systemctl restart ceph-radosgw@rgw.AHHN-PSC-S1X1-SPOD2-PM-OS01-BCONEST-RGW01.rgw$i |grep running;done
-#ceph 
+#ceph
